@@ -1,5 +1,6 @@
 {
-	"name": "permaweb-deploy",
+	"name": "@rosmcmahon/permaweb-deploy",
+	"publishConfig": { "access": "public" },
 	"version": "1.1.9",
 	"description": "Permaweb app deployment package",
 	"main": "index.js",
@@ -7,7 +8,7 @@
 		"build": "babel src --out-dir dist"
 	},
 	"bin": {
-		"permaweb-deploy": "./dist/index.js"
+		"permaweb-deploy": "dist/index.js"
 	},
 	"dependencies": {
 		"@ar.io/sdk": "^2.2.5",
