@@ -43,28 +43,23 @@ export function getTagValue(list, name) {
 
 (async () => {
 	if (!DEPLOY_KEY) {
-		console.error('DEPLOY_KEY not configured');
-		return;
+		throw new Error('DEPLOY_KEY not configured');
 	}
 
 	if (!ANT_PROCESS) {
-		console.error('ANT_PROCESS not configured');
-		return;
+		throw new Error('ANT_PROCESS not configured');
 	}
 
 	if (argv.deployFolder.length == 0) {
-		console.error('deploy folder must not be empty');
-		return;
+		throw new Error('deploy folder must not be empty');
 	}
 
 	if (argv.undername.length == 0) {
-		console.error('undername must not be empty');
-		return;
+		throw new Error('undername must not be empty');
 	}
 
 	if (!fs.existsSync(argv.deployFolder)) {
-		console.error(`deploy folder [${argv.deployFolder}] does not exist`);
-		return;
+		throw new Error(`deploy folder [${argv.deployFolder}] does not exist`);
 	}
 
 	let jwk = JSON.parse(Buffer.from(DEPLOY_KEY, 'base64').toString('utf-8'));
@@ -95,6 +90,6 @@ export function getTagValue(list, name) {
 
 		console.log(`Deployed TxId [${manifestId}] to ANT [${ANT_PROCESS}] using undername [${argv.undername}]`);
 	} catch (e) {
-		console.error(e);
+		throw e;
 	}
 })();
